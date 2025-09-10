@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio rafly</title>
+    <title>My Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -635,49 +635,67 @@ Kini saya siap berkontribusi dalam dunia kerja dan mengubah ide menjadi pengalam
 
 
 <!-- CONTACT -->
-<section id="contact" class="py-12 bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-  <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-10 animate-slide-up text-gray-800">Contact Me</h2>
-  <form class="max-w-md mx-auto flex flex-col gap-4 sm:gap-5 p-6 rounded-2xl backdrop-blur-md bg-white/60 shadow-lg border border-white/30">
+<section id="contact" class="py-12 bg-gradient-to-r from-blue-200 via-blue-100 to-white max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+  <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-10 animate-slide-up text-blue-800">Contact Me</h2>
+  <form class="max-w-md mx-auto flex flex-col gap-4 sm:gap-5 p-6 rounded-2xl backdrop-blur-md bg-white/80 shadow-lg border border-blue-200">
     
     <input type="text" placeholder="Your Name" 
-      class="border border-white/40 p-3 rounded-xl backdrop-blur-sm bg-white/40 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:scale-105 transition-transform duration-300">
+      class="border border-blue-200 p-3 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:scale-105 transition-transform duration-300 shadow-sm hover:shadow-md">
     
     <input type="email" placeholder="Your Email" 
-      class="border border-white/40 p-3 rounded-xl backdrop-blur-sm bg-white/40 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:scale-105 transition-transform duration-300">
+      class="border border-blue-200 p-3 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:scale-105 transition-transform duration-300 shadow-sm hover:shadow-md">
     
     <textarea placeholder="Your Message" rows="4" 
-      class="border border-white/40 p-3 rounded-xl backdrop-blur-sm bg-white/40 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:scale-105 transition-transform duration-300"></textarea>
+      class="border border-blue-200 p-3 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:scale-105 transition-transform duration-300 shadow-sm hover:shadow-md"></textarea>
     
     <button type="submit" 
-      class="bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 rounded-xl hover:scale-105 hover:shadow-xl transition transform duration-300 shadow-md">
+      class="bg-gradient-to-r from-blue-500 to-blue-700 text-white py-3 rounded-xl hover:scale-105 hover:shadow-xl hover:shadow-blue-400/50 transition transform duration-300 shadow-md">
       Send Message
     </button>
   </form>
 </section>
 
-<footer class="py-4 text-center text-gray-700 text-sm sm:text-base">&copy; 2025 Rafly. All rights reserved.</footer>
+<footer class="py-4 text-center text-blue-700 text-sm sm:text-base">&copy; 2025 Rafly. All rights reserved.</footer>
 
-<!-- Optional slide-up animation -->
+<!-- Animasi slide-up -->
 <style>
   @keyframes slide-up {
-    0% { opacity: 0; transform: translateY(20px); }
+    0% { opacity: 0; transform: translateY(30px); }
     100% { opacity: 1; transform: translateY(0); }
   }
   .animate-slide-up {
-    animation: slide-up 0.8s ease-out forwards;
+    animation: slide-up 1s ease-out forwards;
+  }
+
+  /* Tambahan hover glow effect */
+  form input:hover,
+  form textarea:hover {
+    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+  }
+
+  button:hover {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
   }
 </style>
 
 <script>
+  // Intersection Observer untuk slide-up
+  const slideUpElements = document.querySelectorAll('#contact h2, #contact form');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('animate-slide-up');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  slideUpElements.forEach(el => observer.observe(el));
+
+  // Auto slide functions tetap bisa dipakai
   function moveRight(trackId){         
     const track = document.getElementById(trackId);
     track.style.transform = `translateX(-250px)`; 
-    setTimeout(()=>{
-      track.appendChild(track.firstElementChild);
-      track.style.transition='none';
-      track.style.transform='translateX(0)';
-      setTimeout(()=>{track.style.transition='transform 0.5s ease-in-out'},50)
-    },500);
+    setTimeout(()=>{track.appendChild(track.firstElementChild); track.style.transition='none'; track.style.transform='translateX(0)'; setTimeout(()=>{track.style.transition='transform 0.5s ease-in-out'},50)},500);
   }
   function moveLeft(trackId){
     const track = document.getElementById(trackId);
@@ -686,7 +704,5 @@ Kini saya siap berkontribusi dalam dunia kerja dan mengubah ide menjadi pengalam
     track.style.transform='translateX(-250px)';
     setTimeout(()=>{track.style.transition='transform 0.5s ease-in-out'; track.style.transform='translateX(0)';},50);
   }
-
-  // Auto slide every 3s
   setInterval(()=>{ moveRight('skills-track'); moveRight('projects-track'); }, 3000);
 </script>
